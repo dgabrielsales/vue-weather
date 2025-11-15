@@ -31,8 +31,7 @@ app.get('/api/clima/:cidade', async (req, res) => {
        }
        
        const dados = await resposta.json();
-       res.status(200).json(dados);
-       console.log(dados)
+       res.status(200).json(dados);   
 
     }catch(error){
         console.error('Erro', error.message);

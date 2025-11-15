@@ -3,15 +3,15 @@ import { ref } from 'vue'
 
 const cidade = ref('');
 const Clima = ref(null);
-const erro = ref(null);
+const dadosErro = ref(null);
 const carregando = ref(false);
 
 const buscarClima = async () => {
      Clima.value = null;
-     erro.value  = null;
+     dadosErro.value  = null;
 
      if(cidade.value.trim() === ''){
-       erro.value = 'Digite uma cidade'
+       dadosErro.value = 'Digite uma cidade'
        return;
      }
      carregando.value = true;
@@ -20,7 +20,9 @@ const buscarClima = async () => {
         const url = await fetch(`http://localhost:3000/api/clima/${cidade.value.trim()}`);
       
         if(!url.ok){
-            throw new Error(`Erro, ${url.status}`)
+            const dadosErro = await url.json(); 
+            console.log(dadosErro);
+            throw new Error(dadosErro.message || `Erro de busca: ${url.status}`);
         };
         
         const resposta = await url.json();
@@ -31,7 +33,7 @@ const buscarClima = async () => {
         console.log(resposta)
    
      }catch(erro){
-      erro.value = erro.message;
+      dadosErro.value = erro.message;
      }finally{
       carregando.value = false;
      };
@@ -54,8 +56,8 @@ const buscarClima = async () => {
      <button @click="buscarClima" :disabled="carregando" class="w-full bg-purple-800 hover:bg-purple-900 rounded-xl p-2 font-semibold">{{carregando ? 'Carregando' : 'Buscar'}}</button>
   </div>
 
-  <p v-if="erro" class="text-red-500 text-medium">
-      {{erro }}
+  <p v-if="dadosErro" class="text-red-500 text-medium">
+      {{dadosErro}}
   </p>
 
   <div v-else-if="Clima" >
