@@ -1,38 +1,6 @@
 <script setup>
 import { ref } from 'vue'
 
-
-const dadosSimulados = {
-    // 1. Nome da Cidade
-    name: "Porto Alegre",
-
-    // 2. Informações do Sistema (País)
-    sys: {
-        country: "BR"
-    },
-
-    // 3. Informações Principais (Temperatura)
-    main: {
-        temp: 22.5,          // Temperatura atual
-        feels_like: 23.1,    // Sensação
-        temp_min: 18.0,      // Mínima
-        temp_max: 25.0,      // Máxima
-        pressure: 1012,
-        humidity: 65
-    },
-
-    // 4. Informações do Tempo (Descrição)
-    // Note que 'weather' é um ARRAY, e você acessa a descrição em [0]
-    weather: [
-        {
-            id: 800,
-            main: "Clear",
-            description: "céu limpo", // Sua template usa weather[0].description
-            icon: "01d"
-        }
-    ]
-};
-
 const cidade = ref('');
 const Clima = ref(null);
 const erro = ref(null);
