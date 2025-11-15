@@ -99,7 +99,7 @@ const buscarClima = async () => {
   <div class="flex items-center gap-3">
     <div class="text-4xl font-bold">{{Clima.main.temp}}°C</div>
     <div class="text-gray-300 font-medium leading-tight">
-      <p></p>
+      <p>{{Clima.weather[0].description }}</p>
     </div>
   </div>
 
@@ -108,6 +108,11 @@ const buscarClima = async () => {
     <span>❄ Min: {{Clima.main.temp_min}}°C</span>
   </div>
 </div>
+
+ <div >
+
+ </div>
+
  </div>
 </main>
 
